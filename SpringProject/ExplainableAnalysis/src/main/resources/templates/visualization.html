@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Visualization Page</title>
+</head>
+<body>
+
+<h1>Generate Visualization</h1>
+<div th:if="${previousSearches}">
+    <h2>Your Previous Searches:</h2>
+    <ul>
+        <li th:each="search : ${previousSearches}">
+            <span>Features: <span th:text="${search.Input}"></span></span>,
+            <span>Plot Type: <span th:text="${search.plotType}"></span></span>,
+            <span>Model Type: <span th:text="${search.modelType}"></span></span>
+            <!-- Button to use this search configuration -->
+            <button type="button" onclick="populateForm([[${search.features}]], '[[${search.plotType}]]', '[[${search.modelType}]]')">
+                Use This Search
+            </button>
+        </li>
+    </ul>
+</div>
+<!-- Ensure the form action matches the @PostMapping URL in your controller -->
+<form th:action="@{/images}" method="post">
+    <label for="features">Select Feature:</label>
+    <select name="features" id="features" multiple required>
+        <option th:each="feature : ${features}" th:value="${feature}" th:text="${feature}"></option>
+    </select>
+
+    <label for="plotType">Select Plot Type:</label>
+    <select name="plotType" id="plotType" required>
+        <option th:each="plot : ${plotTypes}" th:value="${plot}" th:text="${plot}"></option>
+    </select>
+
+    <label for="modelType">Select Model Type:</label>
+    <select name="modelType" id="modelType" required>
+        <option th:each="type : ${modelTypes}" th:value="${type}" th:text="${type}"></option>
+    </select>
+
+    <button type="submit">Generate Visualization</button>
+</form>
+
+<!-- Display the image if it's available -->
+<div th:if="${imageData}">
+    <h2>Visualization Result:</h2>
+    <img th:src="@{${imageData}}" alt="Visualization Image"/>
+</div>
+
+<!-- Display error if there is one -->
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+
+</body>
+</html>
