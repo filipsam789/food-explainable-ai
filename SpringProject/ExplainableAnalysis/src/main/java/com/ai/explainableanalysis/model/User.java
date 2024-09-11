@@ -24,7 +24,6 @@ public class User {
     private boolean isCredentialsNonExpired =  true;
     private boolean isEnabled = true;
 
-
     public User( String name, String username, String password, String email, Role role) {
         this.name = name;
         this.username = username;

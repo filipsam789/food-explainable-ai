@@ -3,7 +3,6 @@ package com.ai.explainableanalysis.web;
 import com.ai.explainableanalysis.model.Requests.VisualizationRequest;
 import com.ai.explainableanalysis.service.ImageService;
 import com.ai.explainableanalysis.service.ShapService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -34,10 +33,11 @@ public class ExplainableAnalysisController {
 
     @GetMapping
     public String showVisualizationPage(Model model) {
-        // List of features to display in the dropdown
         AddAttributes(model);
 
-        return "visualization";
+        model.addAttribute("bodyContent", "visualization");
+
+        return "master-template";
     }
 
     @PostMapping
@@ -59,7 +59,6 @@ public class ExplainableAnalysisController {
         ResponseEntity<String> response = sendPostRequest(requestBody);
 
         if (response.getStatusCode() == HttpStatus.OK) {
-            // Assuming the response body is a base64 encoded image string
             String imageData = response.getBody();
             imageData=imageData.substring(1, imageData.length() - 1);
 
@@ -70,8 +69,9 @@ public class ExplainableAnalysisController {
         }
 
         AddAttributes(model);
+        model.addAttribute("bodyContent", "visualization");
 
-        return "visualization"; // Return the same Thymeleaf template
+        return "master-template";
     }
     private ResponseEntity<String> sendPostRequest(String body) {
         HttpHeaders headers = new HttpHeaders();

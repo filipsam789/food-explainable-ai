@@ -1,0 +1,45 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #FF006C">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+          <img src="/images/favicon.svg" style="width: 35px; height: 35px;" alt="Logo of the page"/>
+          FoodFraudXplain
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <ul class="navbar-nav m-auto">
+            <li class="nav-item m-auto">
+                <a class="nav-link active" href="/">Home</a>
+            </li>
+            <li class="nav-item m-auto">
+                <a class="nav-link active" href="/visualizations">Visualizations</a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+<!--              <th:block th:if="${#request.getRemoteUser() != null}"-->
+<!--                        th:text="${#request.getRemoteUser()}"></th:block>-->
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary btn-sm ml-3" href="/logout">
+              <i class="fa fa-shopping-cart"></i> Logout
+            </a>
+          </li>
+          <li class="nav-item" >
+            <a class="btn btn-primary btn-sm ml-3" href="/login">
+              <i class="fa fa-shopping-cart"></i> Login
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
