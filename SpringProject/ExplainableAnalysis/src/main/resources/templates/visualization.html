@@ -21,7 +21,7 @@
     </ul>
 </div>
 <!-- Ensure the form action matches the @PostMapping URL in your controller -->
-<form th:action="@{/images}" method="post">
+<form th:action="@{/visualizations}" method="post">
     <label for="features">Select Feature:</label>
     <select name="features" id="features" multiple required>
         <option th:each="feature : ${features}" th:value="${feature}" th:text="${feature}"></option>
@@ -43,7 +43,7 @@
 <!-- Display the image if it's available -->
 <div th:if="${imageData}">
     <h2>Visualization Result:</h2>
-    <img th:src="@{${imageData}}" alt="Visualization Image"/>
+    <img th:src="'data:image/png;base64,' + ${imageData}" alt="Visualization Image"/>
 </div>
 
 <!-- Display error if there is one -->

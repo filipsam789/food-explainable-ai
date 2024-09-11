@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 public class ImageServiceImpl implements ImageService {
 
-    private static final String IMAGE_SAVE_DIR = "src/main/resources/static/visualizations";
+    private static final String IMAGE_SAVE_DIR = "src/main/resources/static/images/";
 
     @Override
     public String saveImage(String base64Image) throws IOException {
@@ -28,6 +28,6 @@ public class ImageServiceImpl implements ImageService {
         }
 
         // Return the relative path to save in the database
-        return "/images/" + fileName;
+        return fileName;
     }
 }

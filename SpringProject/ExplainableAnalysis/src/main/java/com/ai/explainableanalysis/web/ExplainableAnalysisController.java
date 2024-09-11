@@ -47,11 +47,11 @@ public class ExplainableAnalysisController {
             @RequestParam String modelType,
             Model model) throws IOException {
 
-        String result = shapService.getVisualizationByInput(features,modelType,plotType);
+       /* String result = shapService.getVisualizationByInput(features,modelType,plotType);
         if(!result.equals("None")){
-            model.addAttribute("imageData", result);
+            model.addAttribute("imageUrl", result);
             return "visualization";
-        }
+        }*/
 
         VisualizationRequest request= new VisualizationRequest(features,plotType,modelType);
         String requestBody = new ObjectMapper().writeValueAsString(request);
@@ -63,10 +63,10 @@ public class ExplainableAnalysisController {
             String imageData = response.getBody();
             imageData=imageData.substring(1, imageData.length() - 1);
 
-            String imageUrl=imageService.saveImage(imageData);
-            shapService.saveVisualizations(modelType,features,plotType,imageUrl);
+/*            String imageUrl=imageService.saveImage(imageData);
+            shapService.saveVisualizations(modelType,features,plotType,imageUrl);*/
 
-            model.addAttribute("imageData", imageUrl);
+            model.addAttribute("imageData", imageData);
         }
 
         AddAttributes(model);
