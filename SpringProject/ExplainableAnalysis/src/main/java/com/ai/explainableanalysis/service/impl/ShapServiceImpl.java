@@ -7,8 +7,11 @@ import com.ai.explainableanalysis.repository.InputParametersRepository;
 import com.ai.explainableanalysis.repository.ShapCacheRepository;
 import com.ai.explainableanalysis.repository.VisualizationDataRepository;
 import com.ai.explainableanalysis.service.ShapService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -24,12 +27,9 @@ public class ShapServiceImpl implements ShapService {
     }
 
     @Override
-    public void saveVisualizations(String modelType, List<String> features, String plotType, String imageData) {
+    public void saveVisualizations(String modelType, List<String> features, String plotType, VisualizationData visualizationData) {
         InputParameters inputParameters = new InputParameters(modelType, features, plotType);
         inputParameters = inputParametersRepository.save(inputParameters);
-
-        VisualizationData visualizationData = new VisualizationData(imageData, null);
-        visualizationData = visualizationDataRepository.save(visualizationData);
 
         ShapCache shapCache = new ShapCache(modelType, inputParameters, visualizationData);
         shapCache.setVisualization(visualizationData);
@@ -44,12 +44,15 @@ public class ShapServiceImpl implements ShapService {
         return shapCacheRepository.findByUser_Username(username);
     }
 
+
     @Override
+    @Transactional
     public String getVisualizationByInput(List<String> features, String modelType, String plotType) {
         ShapCache result = shapCacheRepository.findByInput_FeaturesInAndInput_ModelTypeAndInput_PlotType(features,modelType,plotType);
         if(result == null){
-            return "None";
+            return null;
         }
-        return result.getVisualization().getImageData();
+        String base64= result.getVisualization().getImageData();
+        return base64;
     }
 }

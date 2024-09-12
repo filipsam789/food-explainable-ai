@@ -6,7 +6,7 @@ import com.ai.explainableanalysis.model.VisualizationData;
 import java.util.List;
 
 public interface ShapService {
-    public void saveVisualizations(String modelType, List<String> features, String plotType, String imageData);
+    public void saveVisualizations(String modelType, List<String> features, String plotType, VisualizationData visualizationData);
     public List<ShapCache> getUserLatestVisualizations(String username);
     public String getVisualizationByInput(List<String> features, String modelType, String plotType);
 }

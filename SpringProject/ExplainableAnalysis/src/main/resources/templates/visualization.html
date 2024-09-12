@@ -25,7 +25,7 @@
     <div class="col-8">
         <div th:if="${imageData}" style="max-height: 40%; max-width: 40%">
             <h2>Visualization Result:</h2>
-            <img th:src="'data:image/png;base64,' + ${imageData}" alt="Visualization Image"/>
+            <img th:src="@{'data:image/png;base64,' + ${imageData}}" alt="Visualization Image"/>
         </div>
     </div>
 </div>
@@ -48,3 +48,12 @@
         <p th:text="${error}"></p>
     </div>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+</body>
+</html>

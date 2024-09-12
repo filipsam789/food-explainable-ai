@@ -22,8 +22,8 @@ public class ShapCache {
     @JoinColumn(name = "user_id") // Foreign key column
     private User user;
     @OneToOne
-    private VisualizationData visualization;
     @JoinColumn(name = "visualization", referencedColumnName = "Id", unique = true)
+    private VisualizationData visualization;
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
     private boolean isValid;

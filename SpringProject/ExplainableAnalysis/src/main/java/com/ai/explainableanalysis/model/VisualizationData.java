@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -11,6 +13,7 @@ public class VisualizationData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @Lob
     private String imageData;
     @OneToOne(mappedBy = "visualization", cascade = CascadeType.ALL)
     private ShapCache shapCache;
